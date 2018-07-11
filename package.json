@@ -1,0 +1,19 @@
+{
+  "name": "sonicbot",
+  "version": "1.0.0",
+  "description": "The official SonicBot",
+  "main": "index.js",
+  "scripts": {
+    "index.js": "node index.js"
+  },
+  "author": "Raduino",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "discord.js": "^11.3.2",
+    "fs": "0.0.1-security",
+    "got": "^8.3.2",
+    "moment": "^2.22.2",
+    "ms": "^2.1.1"
+  }
+}
