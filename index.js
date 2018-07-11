@@ -4,8 +4,9 @@ const client = new Discord.Client();
 
 const ms = require("ms");
 
-
 const config = require("./config.json");
+
+const token = require("./token.json")
 
 client.on("ready", async () => {
 
@@ -251,15 +252,6 @@ client.on("message", async message => {
         });
     }
 
-    if (command === `prune`) {
-
-        if (!message.member.hasPermission("MANAGE_SERVER")) return message.reply("You cannot execute this command!");
-        if (!args[0]) return message.channel.send("You didn't specify the amount of messages to delete!");
-        message.channel.bulkDelete(args[0]).then(() => {
-            message.channel.send(`Pruned ${args[0]} messages.`);
-        });
-    }
-
     if (command === `announce`) {
         if (!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send("You cannot execute this command!");
 
@@ -298,12 +290,6 @@ function clean(text) {
         return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
     else
         return text;
-}
-
-if (command === "ping") {
-
-    const m = await message.channel.send("It's raining flakes!");
-    m.edit(`Flakes is the best flake, with latency ${m.createdTimestamp - message.createdTimestamp}ms and API Latency ${Math.round(client.ping)}ms!`);
 }
 
 if (command === "info") {
@@ -348,4 +334,4 @@ if (command === "info") {
 
 });
 
-client.login(config.token);
+client.login(token.bottoken);
