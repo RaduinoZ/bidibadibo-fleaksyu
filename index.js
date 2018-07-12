@@ -6,13 +6,11 @@ const ms = require("ms");
 
 const config = require("./config.json");
 
-const token = require("./token.json")
-
 client.on("ready", async () => {
 
     console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds. At ` + new Date());
 
-    client.user.setActivity("with flakes help!", {
+    client.user.setActivity("with fleakes help!", {
         type: "PLAYING"
     });
 
@@ -25,7 +23,7 @@ client.on('guildMemberAdd', member => {
     let embed = new Discord.RichEmbed()
         .setDescription('Welcome!')
         .setColor('RANDOM')
-        .addField(':100:', `Welcome to Flakes Bot, ${member}!`)
+        .addField(':100:', `Welcome to Fleakes Bot, ${member}!`)
         .setFooter("Flakes")
         .setTimestamp()
 
@@ -285,49 +283,66 @@ client.on("message", async message => {
         }
     }
 
-function clean(text) {
-    if (typeof(text) === "string")
-        return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
-    else
-        return text;
-}
+    function clean(text) {
+        if (typeof(text) === "string")
+            return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
+        else
+            return text;
+    }
 
-if (command === "info") {
+    if (command === "info") {
 
-    message.channel.send({
-        embed: {
-            color: 3447003,
-            author: {
-                name: client.user.username,
-                icon_url: client.user.avatarURL
-            },
-            title: "Information",
-
-            description: "Hello, I'm Flakes! The flakiest bot of them all.",
-
-            fields: [{
-                    name: "Commands",
-
-                    value: "To see all my commands type flakes help!"
+        message.channel.send({
+            embed: {
+                color: 3447003,
+                author: {
+                    name: client.user.username,
+                    icon_url: client.user.avatarURL
                 },
-                {
-                    name: "Official Server",
+                title: "Information",
 
-                    value: "My official server is Flakes Bot!"
-                },
-                {
-                    name: "Credits",
+                description: "Hello, I'm Flakes! The flakiest bot of them all.",
 
-                    value: "I was created by Raduino#0006."
+                fields: [{
+                        name: "Commands",
+
+                        value: "To see all my commands type flakes help!"
+                    },
+                    {
+                        name: "Official Server",
+
+                        value: "My official server is Flakes Bot!"
+                    },
+                    {
+                        name: "Credits",
+
+                        value: "I was created by Raduino#0006."
+                    }
+                ],
+                timestamp: new Date(),
+                footer: {
+                    text: "Fleakes"
                 }
-            ],
-            timestamp: new Date(),
-            footer: {
-                text: "Flakes"
             }
-        }
-    });
-}
+        });
+    }
+
+    if (command === "help") {
+
+        var embed = new Discord.RichEmbed()
+        .setDescription(`Help Menu`);
+        .addField('Help', "See all the commands");
+        .addField('Ban', "Usage: flekes ban @user (reason)");
+        .addField('Kick', "Usage: flekes kick @user (reason)");
+        .addField('Info', "Bot information");
+        .addField('ServerInfo', "Server information ");
+        .addField('Ping', "Latency of the API and Bot");
+        .addField('Announce', "Make an announcement");
+        .addField('Prune', "Delete a number of messages")
+        .setColor("#00FF13")
+
+        message.channel.sendEmbed(embed)
+    }
 
 
 
