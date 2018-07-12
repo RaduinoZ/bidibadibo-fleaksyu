@@ -12,7 +12,7 @@ client.on("ready", async () => {
 
     console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds. At ` + new Date());
 
-    client.user.setActivity("with fleakes help!", {
+    client.user.setActivity("with fleaks help!", {
         type: "PLAYING"
     });
 
