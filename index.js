@@ -6,6 +6,8 @@ const ms = require("ms");
 
 const config = require("./config.json");
 
+const token = require("./token.json");
+
 client.on("ready", async () => {
 
     console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds. At ` + new Date());
@@ -326,27 +328,6 @@ client.on("message", async message => {
             }
         });
     }
-
-    if (command === "help") {
-
-        var embed = new Discord.RichEmbed()
-        .setDescription(`Help Menu`);
-        .addField('Help', "See all the commands");
-        .addField('Ban', "Usage: flekes ban @user (reason)");
-        .addField('Kick', "Usage: flekes kick @user (reason)");
-        .addField('Info', "Bot information");
-        .addField('ServerInfo', "Server information ");
-        .addField('Ping', "Latency of the API and Bot");
-        .addField('Announce', "Make an announcement");
-        .addField('Prune', "Delete a number of messages")
-        .setColor("#00FF13")
-
-        message.channel.sendEmbed(embed)
-    }
-
-
-
-
 });
 
 client.login(token.bottoken);
