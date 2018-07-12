@@ -4,9 +4,13 @@ const client = new Discord.Client();
 
 const ms = require("ms");
 
+const snekfetch = require('snekfetch');
+
 const config = require("./config.json");
 
 const token = require("./token.json");
+
+const trim = (str, max) => (str.length > max) ? `${str.slice(0, max - 3)}...` : str;
 
 client.on("ready", async () => {
 
@@ -328,6 +332,11 @@ client.on("message", async message => {
             }
         });
     }
+    if (command === 'cat') {
+		const { body } = await snekfetch.get('https://aws.random.cat/meow');
+
+		message.channel.send(body.file);
+	}
 });
 
 client.login(token.bottoken);
