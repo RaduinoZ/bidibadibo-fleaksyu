@@ -1,9 +1,10 @@
 const Discord = require("discord.js");
 const snekfetch = require('snekfetch');
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (client, message, args) => {
 
   const { body } = await snekfetch.get('https://api.urbandictionary.com/v0/define').query({ term: args.join(' ') });
+  const trim = (str, max) => (str.length > max) ? `${str.slice(0, max - 3)}...` : str;
 
   if (body.result_type === 'no_results') {
     return message.channel.send(`No results found for **${args.join(' ')}**`);
@@ -12,7 +13,7 @@ module.exports.run = async (bot, message, args) => {
   const [answer] = body.list;
 
   const embed = new Discord.RichEmbed()
-    .setColor('#EFFF00')
+    .setColor('#F51414')
     .setTitle(answer.word)
     .setURL(answer.permalink)
     .addField('Definition', trim(answer.definition, 1024))

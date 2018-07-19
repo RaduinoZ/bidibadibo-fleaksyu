@@ -4,17 +4,28 @@
   "description": "The official SonicBot",
   "main": "index.js",
   "scripts": {
-    "index.js": "node index.js"
+    "start": "node index.js"
   },
-  "author": "Raduino",
+  "engines": {
+    "node": "10.5.0"
+  },
   "license": "ISC",
   "dependencies": {
     "chalk": "^2.4.1",
     "discord.js": "^11.3.2",
-    "fs": "^0.0.1-security",
+    "fs": "^0.0.2",
     "got": "^8.3.2",
     "moment": "^2.22.2",
     "ms": "^2.1.1",
-    "snekfetch": "^4.0.4"
+    "snekfetch": "^4.0.4",
+    "express": "^4.16.3",
+    "cheerio": "^0.22.0",
+    "request": "^2.87.0",
+    "fortnite": "^4.1.1",
+    "custom-translate": "^2.2.4",
+    "superagent": "^3.8.3",
+    "fs-nextra": "^0.3.5",
+    "canvas-constructor": "^1.0.1",
+    "canvas": "^1.6.11"
   }
 }

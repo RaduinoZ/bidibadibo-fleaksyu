@@ -1,9 +1,21 @@
+const http = require('http');
+const express = require('express');
+const app = express();
+app.get("/", (request, response) => {
+  console.log(Date.now() + " Ping Received");
+  response.sendStatus(200);
+});
+app.listen(process.env.PORT);
+setInterval(() => {
+  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
+}, 280000);
+
+
 const config = require("./config.json");
-const token = require("./token.json");
 const Discord = require("discord.js");
 const fs = require("fs");
-const bot = new Discord.Client({disableEveryone: true});
-bot.commands = new Discord.Collection();
+const client = new Discord.Client({disableEveryone: true});
+client.commands = new Discord.Collection();
 
 fs.readdir("./commands/", (err, files) => {
 
@@ -17,17 +29,17 @@ fs.readdir("./commands/", (err, files) => {
   jsfile.forEach((f, i) =>{
     let props = require(`./commands/${f}`);
     console.log(`${f} loaded!`);
-    bot.commands.set(props.help.name, props);
+    client.commands.set(props.help.name, props);
   });
 });
 
-bot.on("ready", async () => {
-  console.log(`${bot.user.username} is online on ${bot.guilds.size} servers!`);
-  bot.user.setActivity("with code!", {type: "PLAYING"});
+client.on("ready", async () => {
+  console.log(`${client.user.username} is online on ${client.guilds.size} servers!`);
+  client.user.setActivity("with neurons", {type: "PLAYING"});
 
 });
 
-bot.on("message", async message => {
+client.on("message", async message => {
   if(message.author.bot) return;
   if(message.channel.type === "dm") return;
 
@@ -35,9 +47,9 @@ bot.on("message", async message => {
   let messageArray = message.content.split(" ");
   let cmd = messageArray[0];
   let args = messageArray.slice(1);
-  let commandfile = bot.commands.get(cmd.slice(prefix.length));
-  if(commandfile) commandfile.run(bot,message,args);
+  let commandfile = client.commands.get(cmd.slice(prefix.length));
+  if(commandfile) commandfile.run(client,message,args);
 
 });
 
-bot.login(token.bottoken);
+client.login(process.env.TOKEN);
