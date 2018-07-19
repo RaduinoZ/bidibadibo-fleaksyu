@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const config = require("../config.json");
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (client, message, args) => {
 
   if (message.author.id !== config.ownerID) return;
   try {
@@ -10,12 +10,20 @@ module.exports.run = async (bot, message, args) => {
 
       if (typeof evaled !== "string")
           evaled = require("util").inspect(evaled);
-
-      message.channel.send(clean(evaled), {
-          code: "xl"
-      });
+    
+      let evalEmbed2 = new Discord.RichEmbed()
+      .setDescription("Eval result - Good")
+      .setColor("#F51414")
+      .addField('Output: ', clean(evaled))
+    
+  message.channel.send(evalEmbed2);
   } catch (err) {
-      message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
+      let evalEmbed = new Discord.RichEmbed()
+      .setDescription("Eval result - Error")
+      .setColor("#f40909")
+      .addField('Output: ', clean(err))
+    
+  message.channel.send(evalEmbed);
   }
 
 function clean(text) {

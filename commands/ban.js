@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (client, message, args) => {
 
   let bUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
   if (!bUser) return message.channel.send("Can't find user!");
@@ -9,7 +9,8 @@ module.exports.run = async (bot, message, args) => {
   if (bUser.hasPermission("MANAGE_ROLES")) return message.channel.send("That person can't be kicked!");
 
   let banEmbed = new Discord.RichEmbed()
-      .setColor("#A533FF")
+      .setTitle("Ban")
+      .setColor("#F51414")
       .addField("Banned user", `${bUser} with ID ${bUser.id}`)
       .addField("Banned by", `<@${message.author.id}> with ID ${message.author.id}`)
       .addField("Banned in the channel ", message.channel)
